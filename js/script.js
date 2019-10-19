@@ -43,14 +43,23 @@ document.querySelector(".btn-hold").addEventListener("click", hold);
 
 function hold() {
 
+    var chooseScore = document.querySelector("#chooseScore").value;
+    var setScore;
+
+    if (chooseScore) { // If a Score is set in the input field, the winning score will be its value
+        setScore = chooseScore;
+    } else { // if a score is not set in the input field, the winning score will be 50
+        setScore = 50;
+    }
+
     if (gamePlaying) {
         // add current scroe to global score
         score[activePlayer] += roundScore;
         // update UI
         document.getElementById("score-" + activePlayer).textContent = score[activePlayer];
 
-        // activePlayer with global score = or > 100 is the winner
-        if (score[activePlayer] >= 10) {
+        // activePlayer with global score = or > of setScore is the winner
+        if (score[activePlayer] >= setScore) {
             document.querySelector("#name-" + activePlayer).textContent = "Winner";
             document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
             document.querySelector(".player-" + activePlayer + "-panel").classList.remove("active");
