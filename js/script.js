@@ -14,6 +14,7 @@ document.getElementById("current-1").textContent = "0";
 
 // start game without displaying dice
 document.querySelector(".dice").style.display = "none";
+document.querySelector(".dice2").style.display = "none";
 
 // on click display dice with appropriate image
 document.querySelector(".btn-roll").addEventListener("click", function() {
@@ -21,22 +22,31 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
 
         // Generate a random number for dice
         var dice = Math.floor((Math.random() * 6) + 1);
+        var dice2 = Math.floor((Math.random() * 6) + 1);
 
         // display number in the dice
         var diceDOM = document.querySelector(".dice");
         diceDOM.style.display = "block";
         diceDOM.src = "img/dice-" + dice + ".png";
 
+        var diceDOM2 = document.querySelector(".dice2");
+        diceDOM2.style.display = "block";
+        diceDOM2.src = "img/dice-" + dice2 + ".png";
+
 
         // dice behaviour
-        if (dice !== 1) { // if dice are not 1, or 6 is not repited in same dice, keep playing
-            roundScore += dice;
-            document.getElementById("current-" + activePlayer).textContent = roundScore;
-        } else { // if any of the dice is one, change player
+        if (dice === dice2) { // Player loose his score if dice and dice2 are same number
+            score[activePlayer] = 0;
+            document.getElementById("score-" + activePlayer).textContent = "0";
             nextPlayer();
+        } else { // if any of the dice is one, change player
+            roundScore += dice + dice2;
+            document.getElementById("current-" + activePlayer).textContent = roundScore;
         }
     }
 });
+
+
 
 // click hold button to save score
 document.querySelector(".btn-hold").addEventListener("click", hold);
@@ -90,6 +100,7 @@ function nextPlayer() {
         document.querySelector(".player-1-panel").classList.toggle("active");
 
         document.querySelector(".dice").style.display = "none";
+        document.querySelector(".dice2").style.display = "none";
     }, 300);
 }
 

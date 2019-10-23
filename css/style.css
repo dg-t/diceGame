@@ -185,6 +185,15 @@ input[type=number]::-webkit-outer-spin-button {
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
+.dice2 {
+    position: absolute;
+    left: 50%;
+    top: 290px;
+    transform: translateX(-50%);
+    height: 100px;
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+
 
 /* winner */
 
